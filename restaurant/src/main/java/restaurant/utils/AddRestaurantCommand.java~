@@ -1,0 +1,24 @@
+// src/main/java/restaurant/Utils/AddRestaurantCommand.java
+package restaurant.Utils;
+
+import restaurant.Interface.ICommand;
+import restaurant.Model.Restaurant;
+import restaurant.Repository.RestaurantRepository;
+
+public class AddRestaurantCommand implements ICommand {
+    private RestaurantRepository repository;
+    private String name;
+    private String address;
+
+    public AddRestaurantCommand(RestaurantRepository repository, String name, String address) {
+        this.repository = repository;
+        this.name = name;
+        this.address = address;
+    }
+
+    @Override
+    public void execute() {
+        Restaurant restaurant = new Restaurant(name, address);
+        repository.addRestaurant(restaurant);
+    }
+}

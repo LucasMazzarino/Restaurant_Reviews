@@ -1,0 +1,24 @@
+package restaurant.Controller;
+
+import restaurant.Service.restaurant.AddRestaurant;
+
+public class RestaurantController {
+    private final AddRestaurant service;
+
+    public RestaurantController(AddRestaurant service) {
+        this.service = service;
+    }
+
+//    public void addRestaurant(String name, String address) {
+//        service.addRestaurant(name, address);
+//    }
+//
+//    public Boolean removeRestaurant(String name) {
+//        return service.removeRestaurant(name);
+//    }
+//
+//    public void editRestaurant(String name, String newName, String newAddress) {
+//        service.editRestaurant(name, newName, newAddress);
+//    }
+
+}

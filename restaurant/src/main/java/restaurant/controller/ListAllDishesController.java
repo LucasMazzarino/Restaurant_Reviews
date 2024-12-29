@@ -1,5 +1,4 @@
-// src/main/java/restaurant/controller/dish/ListAllDishesController.java
-package restaurant.controller.dish;
+package restaurant.controller;
 
 import restaurant.controller.interfaces.IController;
 import restaurant.service.dish.ListAllDishes;

@@ -38,10 +38,6 @@ public class Restaurant {
         }
     }
 
-    public double getAverageRating() {
-        return averageRating;
-    }
-
     public void addObserver(IObserver observer) {
         observers.add(observer);
     }
@@ -50,18 +46,22 @@ public class Restaurant {
         observers.remove(observer);
     }
 
+    public List<IObserver> getObservers() {
+        return observers;
+    }
+
     private void notifyObservers(String message) {
         for (IObserver observer : observers) {
             observer.update(message);
         }
     }
 
-    public List<RestaurantReview> getRestaurantReviews() {
-        return restaurantReviews;
+    public double getAverageRating() {
+        return averageRating;
     }
 
-    public void setRestaurantReviews(List<RestaurantReview> restaurantReviews) {
-        this.restaurantReviews = restaurantReviews;
+    public List<RestaurantReview> getRestaurantReviews() {
+        return restaurantReviews;
     }
 
     public Menu getMenu() {

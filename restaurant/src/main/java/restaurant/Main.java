@@ -1,10 +1,9 @@
-// src/main/java/restaurant/Main.java
 package restaurant;
 
 import restaurant.controller.dish.AddDishController;
 import restaurant.controller.dish.EditDishController;
 import restaurant.controller.dish.RemoveDishController;
-import restaurant.controller.dish.ListAllDishesController;
+import restaurant.controller.ListAllDishesController;
 import restaurant.controller.interfaces.IController;
 import restaurant.controller.restaurant.AddRestaurantController;
 import restaurant.controller.restaurant.EditRestaurantController;

@@ -1,7 +1,7 @@
-// src/main/java/restaurant/Service/restaurant/RemoveRestaurant.java
 package restaurant.service.restaurant;
 
 import restaurant.models.Restaurant;
+import restaurant.observer.IObserver;
 import restaurant.repository.RestaurantRepository;
 import restaurant.service.Interfaces.ICommand;
 import restaurant.utils.ConsoleUtils;
@@ -18,7 +18,6 @@ public class RemoveRestaurant implements ICommand<Restaurant> {
         this.repository = repository;
         this.console = console;
     }
-
 
     @Override
     public Restaurant execute() {
@@ -38,10 +37,19 @@ public class RemoveRestaurant implements ICommand<Restaurant> {
         int index = console.getInteger("Introduce el número del restaurante que deseas eliminar: ") - 1;
         if (index >= 0 && index < restaurants.size()) {
             Restaurant restaurant = restaurants.get(index);
+            removeAllObservers(restaurant);
             repository.removeRestaurant(restaurant);
             System.out.println("Restaurante " + restaurant.getName() + " eliminado.");
         } else {
             System.out.println("Índice no válido.");
+        }
+    }
+
+    private void removeAllObservers(Restaurant restaurant) {
+        List<IObserver> observers = restaurant.getObservers();
+        for (IObserver observer : observers) {
+            observer.update("Restaurant removed");
+            restaurant.removeObserver(observer);
         }
     }
 }

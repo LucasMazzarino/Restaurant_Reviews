@@ -1,4 +1,3 @@
-// src/main/java/restaurant/Model/Menu.java
 package restaurant.models;
 
 import restaurant.observer.IObserver;
@@ -26,11 +25,11 @@ public class Menu {
         observers.add(observer);
     }
 
-    public void removeObserver(IObserver observer) {
-        observers.remove(observer);
+    public List<IObserver> getObservers() {
+        return observers;
     }
 
-    private void notifyObservers(String message) {
+    public void notifyObservers(String message) {
         for (IObserver observer : observers) {
             observer.update(message);
         }
@@ -46,6 +45,10 @@ public class Menu {
 
     public List<Dish> getDishes() {
         return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
     }
 
     public void addDish(Dish dish) {

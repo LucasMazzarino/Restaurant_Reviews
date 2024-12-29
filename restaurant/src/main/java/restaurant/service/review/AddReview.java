@@ -62,7 +62,7 @@ public class AddReview implements ICommand<Review> {
             if (dishIndex != -1) {
                 Dish dish = dishes.get(dishIndex);
                 DishReview review = ReviewFactory.createDishReview(comment, qualification, dish);
-                dish.addReview(review);
+                menu.addReview(review); // Use the addReview method of Menu
                 System.out.println("Review añadida al plato " + dish.getName());
             } else {
                 System.out.println("Plato no encontrado");

@@ -14,6 +14,6 @@ public class AddReviewController implements IController {
     @Override
     public void execute() {
         Review review = command.execute();
-        System.out.println("Se agrego la reseña:");
+        System.out.println("Se agrego la review:");
     }
 }

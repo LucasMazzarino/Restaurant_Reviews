@@ -1,4 +1,4 @@
-// src/main/java/restaurant/Model/Dish.java
+// src/main/java/restaurant/models/Dish.java
 package restaurant.models;
 
 import java.util.ArrayList;
@@ -15,6 +15,27 @@ public class Dish {
         this.name = name;
         this.description = description;
         this.price = price;
+    }
+
+    public void addReview(DishReview review) {
+        reviews.add(review);
+        updateAverageRating();
+    }
+
+    private void updateAverageRating() {
+        if (reviews.isEmpty()) {
+            averageRating = 0.0;
+        } else {
+            double total = 0;
+            for (DishReview review : reviews) {
+                total += review.getQualification();
+            }
+            averageRating = total / reviews.size();
+        }
+    }
+
+    public double getAverageRating() {
+        return averageRating;
     }
 
     public String getName() {
@@ -51,18 +72,5 @@ public class Dish {
 
     public List<DishReview> getReviews() {
         return reviews;
-    }
-
-    public double calculateAverageRating() {
-        double total = 0;
-        for (DishReview review : reviews) {
-            total += review.getQualification();
-        }
-        averageRating = total / reviews.size();
-        return averageRating;
-    }
-
-    public double getAverageRating() {
-        return averageRating;
     }
 }

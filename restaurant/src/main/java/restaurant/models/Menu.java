@@ -1,16 +1,39 @@
 // src/main/java/restaurant/Model/Menu.java
 package restaurant.models;
 
+import restaurant.observer.IObserver;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Menu {
     private Restaurant restaurant;
     private List<Dish> dishes;
+    private List<IObserver> observers = new LinkedList<>();
 
     public Menu(Restaurant restaurant) {
         this.restaurant = restaurant;
         this.dishes = new ArrayList<>();
+    }
+
+    public void addReview(DishReview review) {
+        review.getDish().getReviews().add(review);
+        notifyObservers("New review added to dish: " + review.getDish().getName());
+    }
+
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
+    }
+
+    private void notifyObservers(String message) {
+        for (IObserver observer : observers) {
+            observer.update(message);
+        }
     }
 
     public Restaurant getRestaurant() {

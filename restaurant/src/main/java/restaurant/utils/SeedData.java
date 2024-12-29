@@ -1,4 +1,3 @@
-// src/main/java/restaurant/Utils/SeedData.java
 package restaurant.utils;
 
 import restaurant.models.Dish;
@@ -9,9 +8,9 @@ import restaurant.repository.RestaurantRepository;
 public class SeedData {
     public static void preloadData(RestaurantRepository repository) {
         // Create restaurants
-        Restaurant restaurant1 = new Restaurant("Restaurant Azeki", "Address A");
-        Restaurant restaurant2 = new Restaurant("Restaurant Bollero", "Madagascar");
-        Restaurant restaurant3 = new Restaurant("Restaurant Cazona", "Babilonia");
+        Restaurant restaurant1 = new Restaurant("Restaurante Azeki", "Address A");
+        Restaurant restaurant2 = new Restaurant("Restaurante Bollero", "Madagascar");
+        Restaurant restaurant3 = new Restaurant("Restaurante Cazona", "Babilonia");
 
         // Create menus
         Menu menu1 = new Menu(restaurant1);

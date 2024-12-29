@@ -17,7 +17,6 @@ public class Restaurant {
     public Restaurant(String name, String address) {
         this.name = name;
         this.address = address;
-        this.averageRating = 5.0;
     }
 
     public void addReview(RestaurantReview review) {
@@ -28,7 +27,7 @@ public class Restaurant {
 
     private void updateAverageRating() {
         if (restaurantReviews.isEmpty()) {
-            averageRating = 5.0;
+            averageRating = 0.0;
         } else {
             double total = 0;
             for (RestaurantReview review : restaurantReviews) {

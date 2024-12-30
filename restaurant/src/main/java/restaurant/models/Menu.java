@@ -16,6 +16,10 @@ public class Menu {
         this.dishes = new ArrayList<>();
     }
 
+    public Menu() {
+        this.dishes = new ArrayList<>();
+    }
+
     public void addReview(DishReview review) {
         review.getDish().getReviews().add(review);
         notifyObservers("New review added to dish: " + review.getDish().getName());

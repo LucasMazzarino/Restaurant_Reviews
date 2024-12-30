@@ -3,7 +3,7 @@ package restaurant.controller.review;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import restaurant.service.review.AddReview;
-import restaurant.models.Review;
+import restaurant.Interface.IReview;
 
 import static org.mockito.Mockito.*;
 
@@ -18,9 +18,20 @@ public class AddReviewControllerTest {
     }
 
     @Test
-    public void testExecute() {
-        Review review = new Review("Great food!", 5.0);
+    public void testExecuteWithReview() {
+        IReview review = mock(IReview.class);
+        when(review.getComment()).thenReturn("Great food!");
+        when(review.getQualification()).thenReturn(5.0);
         when(addReview.execute()).thenReturn(review);
+
+        addReviewController.execute();
+
+        verify(addReview, times(1)).execute();
+    }
+
+    @Test
+    public void testExecuteWithNullReview() {
+        when(addReview.execute()).thenReturn(null);
 
         addReviewController.execute();
 

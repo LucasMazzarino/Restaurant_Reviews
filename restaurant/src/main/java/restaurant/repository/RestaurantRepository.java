@@ -2,26 +2,20 @@ package restaurant.repository;
 
 import restaurant.models.Restaurant;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantRepository {
+    private List<Restaurant> restaurants = new ArrayList<>();
     private static RestaurantRepository instance;
-    private List<Restaurant> restaurants;
 
-    private RestaurantRepository() {
-        restaurants = new LinkedList<>();
-    }
+    private RestaurantRepository() {}
 
-    public static synchronized RestaurantRepository getInstance() {
+    public static RestaurantRepository getInstance() {
         if (instance == null) {
             instance = new RestaurantRepository();
         }
         return instance;
-    }
-
-    public List<Restaurant> getRestaurants() {
-        return restaurants;
     }
 
     public Restaurant getRestaurant(String name) {
@@ -41,4 +35,16 @@ public class RestaurantRepository {
         return restaurants.remove(restaurant);
     }
 
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public void updateRestaurant(Restaurant restaurant) {
+        for (int i = 0; i < restaurants.size(); i++) {
+            if (restaurants.get(i).getName().equals(restaurant.getName())) {
+                restaurants.set(i, restaurant);
+                break;
+            }
+        }
+    }
 }

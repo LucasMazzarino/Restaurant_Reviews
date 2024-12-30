@@ -4,6 +4,7 @@ import restaurant.models.Restaurant;
 import restaurant.repository.RestaurantRepository;
 import restaurant.service.Interfaces.ICommand;
 import restaurant.utils.ConsoleUtils;
+import restaurant.utils.DefaultMenu;
 
 
 public class AddRestaurant implements ICommand<Restaurant> {
@@ -20,6 +21,7 @@ public class AddRestaurant implements ICommand<Restaurant> {
         String name = console.getString("Ingrese el nombre del restaurante: ");
         String address = console.getString("Ingrese la dirección del restaurante: ");
         Restaurant restaurant = new Restaurant(name, address);
+        restaurant.setMenu(DefaultMenu.getDefaultMenu());
         repository.addRestaurant(restaurant);
         return restaurant;
     }

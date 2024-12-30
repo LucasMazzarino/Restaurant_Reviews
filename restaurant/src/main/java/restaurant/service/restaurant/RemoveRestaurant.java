@@ -33,7 +33,7 @@ public class RemoveRestaurant implements ICommand<Restaurant> {
         return null;
     }
 
-    private void selectRestaurant(List<Restaurant> restaurants) {
+    public void selectRestaurant(List<Restaurant> restaurants) {
         int index = console.getInteger("Introduce el número del restaurante que deseas eliminar: ") - 1;
         if (index >= 0 && index < restaurants.size()) {
             Restaurant restaurant = restaurants.get(index);

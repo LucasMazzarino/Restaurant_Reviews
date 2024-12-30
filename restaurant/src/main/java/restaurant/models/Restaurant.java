@@ -1,6 +1,6 @@
-// src/main/java/restaurant/models/Restaurant.java
 package restaurant.models;
 
+import restaurant.Interface.IReview;
 import restaurant.observer.IObserver;
 
 import java.util.LinkedList;
@@ -10,7 +10,7 @@ public class Restaurant {
     private String name;
     private String address;
     private Menu menu;
-    private List<RestaurantReview> restaurantReviews = new LinkedList<>();
+    private List<IReview> restaurantReviews = new LinkedList<>();
     private List<IObserver> observers = new LinkedList<>();
     private double averageRating;
 
@@ -20,10 +20,14 @@ public class Restaurant {
         this.averageRating = 5.0;
     }
 
-    public void addReview(RestaurantReview review) {
-        restaurantReviews.add(review);
-        updateAverageRating();
-        notifyObservers("Una nueva reseña ha sido agregada al restaurante: " + name);
+    public void addReview(IReview review) {
+        if (review instanceof RestaurantReview) {
+            restaurantReviews.add(review);
+            updateAverageRating();
+            notifyObservers("Una nueva reseña ha sido agregada al restaurante: " + name);
+        } else {
+            throw new IllegalArgumentException("Invalid review type for restaurant");
+        }
     }
 
     private void updateAverageRating() {
@@ -31,7 +35,7 @@ public class Restaurant {
             averageRating = 5.0;
         } else {
             double total = 0;
-            for (RestaurantReview review : restaurantReviews) {
+            for (IReview review : restaurantReviews) {
                 total += review.getQualification();
             }
             averageRating = total / restaurantReviews.size();
@@ -60,7 +64,7 @@ public class Restaurant {
         return averageRating;
     }
 
-    public List<RestaurantReview> getRestaurantReviews() {
+    public List<IReview> getRestaurantReviews() {
         return restaurantReviews;
     }
 

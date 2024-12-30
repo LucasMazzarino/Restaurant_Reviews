@@ -3,7 +3,16 @@ package restaurant.utils;
 import java.util.Scanner;
 
 public class ConsoleUtils {
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+
+    public ConsoleUtils() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public ConsoleUtils(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
 
     public String getString(String message) {
         System.out.println(message);

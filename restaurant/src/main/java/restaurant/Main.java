@@ -25,6 +25,8 @@ import restaurant.service.restaurant.EditRestaurant;
 import restaurant.service.restaurant.RemoveRestaurant;
 import restaurant.service.restaurant.ListAllRestaurants;
 import restaurant.utils.ConsoleUtils;
+import restaurant.utils.DishUtils;
+import restaurant.utils.RestaurantUtils;
 import restaurant.utils.SeedData;
 
 import java.util.HashMap;
@@ -33,6 +35,8 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         ConsoleUtils consoleUtils = new ConsoleUtils();
+        RestaurantUtils restaurantUtils = new RestaurantUtils();
+        DishUtils dishUtils = new DishUtils();
         RestaurantRepository restaurantRepository = RestaurantRepository.getInstance();
 
         SeedData.preloadData(restaurantRepository);
@@ -41,8 +45,8 @@ public class Main {
         RemoveRestaurant removeRestaurantCommand = new RemoveRestaurant(restaurantRepository, consoleUtils);
         AddReview addReviewCommand = new AddReview(restaurantRepository, consoleUtils);
         EditRestaurant editRestaurantCommand = new EditRestaurant(restaurantRepository, consoleUtils);
-        AddDish addDishCommand = new AddDish(restaurantRepository, consoleUtils);
-        EditDish editDishCommand = new EditDish(restaurantRepository, consoleUtils);
+        AddDish addDishCommand = new AddDish(restaurantRepository, consoleUtils, restaurantUtils);
+        EditDish editDishCommand = new EditDish(restaurantRepository, consoleUtils, restaurantUtils, dishUtils);
         RemoveDish removeDishCommand = new RemoveDish(restaurantRepository, consoleUtils);
         ListRestaurantReview listRestaurantReviewCommand = new ListRestaurantReview(restaurantRepository, consoleUtils);
         ListDishReview listDishReviewCommand = new ListDishReview(restaurantRepository, consoleUtils);

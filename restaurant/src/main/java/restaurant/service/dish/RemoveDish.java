@@ -25,16 +25,13 @@ public class RemoveDish implements ICommand<Void> {
     @Override
     public Void execute() {
         Menu menu = restaurantUtils.selectMenu(repository, console);
-        if (menu != null) {
-            List<Dish> dishes = menu.getDishes();
-            dishUtils.showDishes(dishes);
-            int index = dishUtils.getDishIndex(console, dishes, "Introduce el número del plato que deseas eliminar: ");
-            if (index != -1) {
-                Dish dish = dishes.get(index);
-                menu.removeDish(dish);
-                System.out.println("Plato eliminado: " + dish.getName());
-            }
-        }
+        List<Dish> dishes = menu.getDishes();
+        dishUtils.showDishes(dishes);
+        int index = dishUtils.getDishIndex(console, dishes, "Introduce el número del plato que deseas eliminar: ");
+        Dish dish = dishes.get(index);
+        menu.removeDish(dish);
+        repository.updateRestaurant(restaurantUtils.getRestaurantByMenu(repository, menu));
+        System.out.println("Plato eliminado: " + dish.getName());
         return null;
     }
 }

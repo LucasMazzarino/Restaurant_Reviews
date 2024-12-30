@@ -1,3 +1,4 @@
+// src/main/java/restaurant/utils/RestaurantUtils.java
 package restaurant.utils;
 
 import restaurant.models.Menu;
@@ -40,5 +41,15 @@ public class RestaurantUtils {
         } else {
             return null;
         }
+    }
+
+    public Restaurant getRestaurantByMenu(RestaurantRepository repository, Menu menu) {
+        List<Restaurant> restaurants = repository.getRestaurants();
+        for (Restaurant restaurant : restaurants) {
+            if (restaurant.getMenu().equals(menu)) {
+                return restaurant;
+            }
+        }
+        return null;
     }
 }

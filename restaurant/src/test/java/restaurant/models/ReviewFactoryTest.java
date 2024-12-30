@@ -2,6 +2,7 @@ package restaurant.models;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import restaurant.Interface.IReview;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,19 +18,19 @@ public class ReviewFactoryTest {
 
     @Test
     public void testCreateRestaurantReview() {
-        RestaurantReview review = ReviewFactory.createRestaurantReview("¡Excelente!", 5.0, restaurant);
+        IReview review = ReviewFactory.createRestaurantReview("¡Excelente!", 5.0, restaurant);
 
         assertEquals("¡Excelente!", review.getComment());
         assertEquals(5.0, review.getQualification());
-        assertEquals(restaurant, review.getRestaurant());
+        assertEquals(restaurant, ((RestaurantReview) review).getRestaurant());
     }
 
     @Test
     public void testCreateDishReview() {
-        DishReview review = ReviewFactory.createDishReview("¡Sabroso!", 4.5, dish);
+        IReview review = ReviewFactory.createDishReview("¡Sabroso!", 4.5, dish);
 
         assertEquals("¡Sabroso!", review.getComment());
         assertEquals(4.5, review.getQualification());
-        assertEquals(dish, review.getDish());
+        assertEquals(dish, ((DishReview) review).getDish());
     }
 }

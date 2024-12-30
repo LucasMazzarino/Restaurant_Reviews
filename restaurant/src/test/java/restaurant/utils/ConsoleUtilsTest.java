@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConsoleUtilsTest {
+
     private ConsoleUtils consoleUtils;
     private ByteArrayOutputStream outContent;
 
@@ -22,31 +23,63 @@ public class ConsoleUtilsTest {
     }
 
     @Test
-    @DisplayName("Test Read Line")
+    @DisplayName("Test Read String")
     public void testGetString() {
-        String input = "Entrada de prueba";
+
+        String input = "Test input";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        String result = consoleUtils.getString("Introduce la entrada: ");
-        assertEquals("Entrada de prueba", result);
+
+        consoleUtils = new ConsoleUtils(new Scanner(System.in));
+
+        String result = consoleUtils.getString("Enter input: ");
+        assertEquals("Test input", result);
     }
 
     @Test
+    @DisplayName("Test Read Integer with Valid Input")
     public void testGetInteger() {
-        String input = "5";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
 
-        int result = consoleUtils.getInteger("Introduce el número: ");
+        String input = "5";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        consoleUtils = new ConsoleUtils(new Scanner(System.in));
+
+        int result = consoleUtils.getInteger("Enter number: ");
         assertEquals(5, result);
     }
 
     @Test
+    @DisplayName("Test Read Integer with Invalid Input First")
+    public void testGetIntegerWithInvalidInput() {
+        String input = "abc\n5";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        consoleUtils = new ConsoleUtils(new Scanner(System.in));
+
+        int result = consoleUtils.getInteger("Enter number: ");
+        assertEquals(5, result);
+    }
+
+    @Test
+    @DisplayName("Test Read Double with Valid Input")
     public void testGetDouble() {
         String input = "5.0";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        consoleUtils = new ConsoleUtils(new Scanner(System.in));
+        double result = consoleUtils.getDouble("Enter decimal number: ");
+        assertEquals(5.0, result, 0.01);
+    }
 
-        double result = consoleUtils.getDouble("Introduce el número decimal: ");
-        assertEquals(5.0, result);
+    @Test
+    @DisplayName("Test Read Double with Invalid Input First")
+    public void testGetDoubleWithInvalidInput() {
+        String input = "abc\n5.5";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+
+        consoleUtils = new ConsoleUtils(new Scanner(System.in));
+
+        double result = consoleUtils.getDouble("Enter decimal number: ");
+        assertEquals(5.5, result, 0.01);
     }
 }

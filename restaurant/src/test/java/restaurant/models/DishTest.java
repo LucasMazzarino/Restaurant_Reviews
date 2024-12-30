@@ -2,6 +2,7 @@ package restaurant.models;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import restaurant.Interface.IReview;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class DishTest {
 
     @Test
     public void testAddReview() {
-        DishReview review = new DishReview("¡Sabroso!", 4.5, dish);
+        IReview review = new DishReview("¡Sabroso!", 4.5, dish);
         dish.addReview(review);
 
         assertEquals(4.5, dish.getAverageRating());
@@ -49,9 +50,9 @@ public class DishTest {
 
     @Test
     public void testSetReviews() {
-        DishReview review1 = new DishReview("Buena", 4.0, dish);
-        DishReview review2 = new DishReview("Excelente servicio", 5.0, dish);
-        List<DishReview> reviews = new ArrayList<>();
+        IReview review1 = new DishReview("Buena", 4.0, dish);
+        IReview review2 = new DishReview("Excelente servicio", 5.0, dish);
+        List<IReview> reviews = new ArrayList<>();
         reviews.add(review1);
         reviews.add(review2);
 

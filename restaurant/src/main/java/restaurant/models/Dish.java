@@ -1,5 +1,6 @@
-// src/main/java/restaurant/models/Dish.java
 package restaurant.models;
+
+import restaurant.Interface.IReview;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,18 +9,26 @@ public class Dish {
     private String name;
     private String description;
     private double price;
-    private List<DishReview> reviews = new ArrayList<>();
+    private List<IReview> reviews = new ArrayList<>();
     private double averageRating;
 
     public Dish(String name, String description, double price) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.averageRating = 0.0;
     }
 
-    public void addReview(DishReview review) {
-        reviews.add(review);
-        updateAverageRating();
+    public void addReview(IReview review) {
+        if (review instanceof DishReview) {
+            if (review.getQualification() < 0 || review.getQualification() > 10) {
+                throw new IllegalArgumentException("Qualification must be between 0 and 10");
+            }
+            reviews.add(review);
+            updateAverageRating();
+        } else {
+            throw new IllegalArgumentException("Invalid review type for dish");
+        }
     }
 
     private void updateAverageRating() {
@@ -27,7 +36,7 @@ public class Dish {
             averageRating = 0.0;
         } else {
             double total = 0;
-            for (DishReview review : reviews) {
+            for (IReview review : reviews) {
                 total += review.getQualification();
             }
             averageRating = total / reviews.size();
@@ -54,9 +63,12 @@ public class Dish {
         this.price = price;
     }
 
-    public void setReviews(List<DishReview> reviews) {
+    public void setReviews(List<IReview> reviews) {
         this.reviews = reviews;
+        updateAverageRating();
     }
+
+    public List<IReview> getDishReviews() { return reviews; }
 
     public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
@@ -70,7 +82,7 @@ public class Dish {
         return price;
     }
 
-    public List<DishReview> getReviews() {
+    public List<IReview> getReviews() {
         return reviews;
     }
 }

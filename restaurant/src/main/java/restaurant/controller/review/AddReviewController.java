@@ -1,7 +1,7 @@
 package restaurant.controller.review;
 
 import restaurant.controller.interfaces.IController;
-import restaurant.models.Review;
+import restaurant.Interface.IReview;
 import restaurant.service.review.AddReview;
 
 public class AddReviewController implements IController {
@@ -13,7 +13,11 @@ public class AddReviewController implements IController {
 
     @Override
     public void execute() {
-        Review review = command.execute();
-        System.out.println("Se agrego la reseña:");
+        IReview review = command.execute();
+        if (review != null) {
+            System.out.println("Se agregó la reseña:");
+            System.out.println("Comentario: " + review.getComment());
+            System.out.println("Calificación: " + review.getQualification());
+        }
     }
 }

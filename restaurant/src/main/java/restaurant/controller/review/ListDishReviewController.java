@@ -1,18 +1,17 @@
-// src/main/java/restaurant/controller/review/ListDishReviewController.java
 package restaurant.controller.review;
 
-import restaurant.controller.interfaces.IController;
 import restaurant.service.review.ListDishReview;
+import restaurant.controller.interfaces.IController;
 
 public class ListDishReviewController implements IController {
-    private final ListDishReview command;
+    private final ListDishReview listDishReview;
 
-    public ListDishReviewController(ListDishReview command) {
-        this.command = command;
+    public ListDishReviewController(ListDishReview listDishReview) {
+        this.listDishReview = listDishReview;
     }
 
     @Override
     public void execute() {
-        command.execute();
+        listDishReview.execute();
     }
 }

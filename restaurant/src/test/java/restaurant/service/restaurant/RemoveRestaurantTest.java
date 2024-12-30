@@ -107,4 +107,13 @@ public class RemoveRestaurantTest {
         verify(repository, times(1)).removeRestaurant(restaurant);
         verify(observer, times(1)).update("Restaurant removed");
     }
+
+    @Test
+    public void testSelectRestaurantWithEmptyList() {
+        List<Restaurant> restaurants = new ArrayList<>();
+
+        removeRestaurant.selectRestaurant(restaurants);
+
+        verify(repository, never()).removeRestaurant(any(Restaurant.class));
+    }
 }

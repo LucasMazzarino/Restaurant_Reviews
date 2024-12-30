@@ -9,6 +9,7 @@ import restaurant.service.Interfaces.ICommand;
 import restaurant.utils.ConsoleUtils;
 import restaurant.utils.DishUtils;
 import restaurant.utils.RestaurantUtils;
+import restaurant.Interface.IReview;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ListDishReview implements ICommand<Void> {
             int dishIndex = dishUtils.getDishIndex(consoleUtils, dishes, "Introduce el número del plato: ");
             if (dishIndex != -1) {
                 Dish dish = dishes.get(dishIndex);
-                List<DishReview> reviews = dish.getReviews();
+                List<IReview> reviews = dish.getReviews();
                 checkReviews(reviews);
             } else {
                 System.out.println("Plato no encontrado");
@@ -45,14 +46,17 @@ public class ListDishReview implements ICommand<Void> {
         return null;
     }
 
-    private static void checkReviews(List<DishReview> reviews) {
+    private static void checkReviews(List<IReview> reviews) {
         if (reviews.isEmpty()) {
             System.out.println("No hay reviews para este plato.");
         } else {
-            for (DishReview review : reviews) {
-                System.out.println("Comentario: " + review.getComment());
-                System.out.println("Calificación: " + review.getQualification());
-                System.out.println("-----");
+            for (IReview review : reviews) {
+                if (review instanceof DishReview) {
+                    DishReview dishReview = (DishReview) review;
+                    System.out.println("Comentario: " + dishReview.getComment());
+                    System.out.println("Calificación: " + dishReview.getQualification());
+                    System.out.println("-----");
+                }
             }
         }
     }

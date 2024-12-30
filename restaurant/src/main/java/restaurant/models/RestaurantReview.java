@@ -1,12 +1,11 @@
-
 package restaurant.models;
 
 import restaurant.Interface.IReview;
 
 public class RestaurantReview implements IReview {
-    private String comment;
-    private Double qualification;
-    private Restaurant restaurant;
+    private final String comment;
+    private final Double qualification;
+    private final Restaurant restaurant;
 
     public RestaurantReview(String comment, Double qualification, Restaurant restaurant) {
         this.comment = comment;
